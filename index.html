@@ -6,326 +6,82 @@
 <title>Assistant IA Exabanque</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #ffffff;
-    --bg2: #f7f7f5;
-    --bg3: #efefec;
-    --border: rgba(0,0,0,0.12);
-    --border2: rgba(0,0,0,0.22);
-    --text: #1a1a1a;
-    --text2: #555;
-    --text3: #999;
-    --accent: #0a5cc4;
-    --accent-bg: #e8f0fd;
-    --accent-text: #0a3a80;
-    --radius: 10px;
-    --radius-lg: 14px;
+    --bg: #ffffff; --bg2: #f7f7f5; --bg3: #efefec;
+    --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.22);
+    --text: #1a1a1a; --text2: #555; --text3: #999;
+    --accent: #0a5cc4; --accent-bg: #e8f0fd; --accent-text: #0a3a80;
+    --radius: 10px; --radius-lg: 14px;
     --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
-
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1a1a;
-      --bg2: #242424;
-      --bg3: #2e2e2e;
-      --border: rgba(255,255,255,0.1);
-      --border2: rgba(255,255,255,0.2);
-      --text: #f0f0f0;
-      --text2: #aaa;
-      --text3: #666;
-      --accent: #4d8ff5;
-      --accent-bg: #0d2347;
-      --accent-text: #8bb8fc;
+      --bg: #1a1a1a; --bg2: #242424; --bg3: #2e2e2e;
+      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.2);
+      --text: #f0f0f0; --text2: #aaa; --text3: #666;
+      --accent: #4d8ff5; --accent-bg: #0d2347; --accent-text: #8bb8fc;
     }
   }
-
   html, body { height: 100%; font-family: var(--font); background: var(--bg); color: var(--text); }
-
-  .app {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  /* Header */
-  .header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-    background: var(--bg);
-  }
-  .header-logo {
-    width: 36px; height: 36px;
-    border-radius: var(--radius);
-    background: var(--accent-bg);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
+  .app { display: flex; flex-direction: column; height: 100vh; max-width: 860px; margin: 0 auto; }
+  .header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); flex-shrink: 0; background: var(--bg); }
+  .header-logo { width: 36px; height: 36px; border-radius: var(--radius); background: var(--accent-bg); display: flex; align-items: center; justify-content: center; font-size: 18px; }
   .header-info { flex: 1; }
   .header-title { font-size: 15px; font-weight: 600; color: var(--text); }
   .header-sub { font-size: 12px; color: var(--text2); margin-top: 1px; }
-  .header-badge {
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 99px;
-    background: var(--accent-bg);
-    color: var(--accent-text);
-    border: 1px solid rgba(10,92,196,0.15);
-    white-space: nowrap;
-  }
-
-  /* Doc selector bar */
-  .doc-bar {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 10px 16px;
-    flex-shrink: 0;
-  }
-  .doc-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .doc-label {
-    font-size: 12px;
-    color: var(--text2);
-    white-space: nowrap;
-  }
-  select {
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border2);
-    background: var(--bg);
-    color: var(--text);
-    cursor: pointer;
-    font-family: var(--font);
-  }
+  .header-badge { font-size: 11px; padding: 3px 9px; border-radius: 99px; background: var(--accent-bg); color: var(--accent-text); border: 1px solid rgba(10,92,196,0.15); white-space: nowrap; }
+  .doc-bar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; flex-shrink: 0; }
+  .doc-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .doc-label { font-size: 12px; color: var(--text2); white-space: nowrap; }
+  select { font-size: 12px; padding: 5px 10px; border-radius: var(--radius); border: 1px solid var(--border2); background: var(--bg); color: var(--text); cursor: pointer; font-family: var(--font); }
   select:focus { outline: none; border-color: var(--accent); }
-  #docSelect { max-width: 260px; }
-  .btn-add {
-    font-size: 12px;
-    padding: 5px 12px;
-    border: 1px solid var(--border2);
-    background: var(--bg);
-    color: var(--text);
-    border-radius: 99px;
-    cursor: pointer;
-    font-family: var(--font);
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
+  #docSelect { max-width: 280px; }
+  .btn-add { font-size: 12px; padding: 5px 12px; border: 1px solid var(--border2); background: var(--bg); color: var(--text); border-radius: 99px; cursor: pointer; font-family: var(--font); white-space: nowrap; }
   .btn-add:hover { background: var(--bg3); }
-  .btn-clear {
-    font-size: 11px;
-    padding: 4px 10px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text3);
-    border-radius: 99px;
-    cursor: pointer;
-    font-family: var(--font);
-  }
+  .btn-clear { font-size: 11px; padding: 4px 10px; border: 1px solid var(--border); background: transparent; color: var(--text3); border-radius: 99px; cursor: pointer; font-family: var(--font); }
   .btn-clear:hover { color: var(--text2); }
-
-  .chips {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-    min-height: 0;
-  }
-  .chip {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    padding: 4px 10px;
-    background: var(--accent-bg);
-    color: var(--accent-text);
-    border-radius: 99px;
-    border: 1px solid rgba(10,92,196,0.15);
-    max-width: 220px;
-  }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .chip { display: flex; align-items: center; gap: 5px; font-size: 11px; padding: 4px 10px; background: var(--accent-bg); color: var(--accent-text); border-radius: 99px; border: 1px solid rgba(10,92,196,0.15); max-width: 250px; }
   .chip-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .chip-x {
-    cursor: pointer;
-    font-size: 15px;
-    line-height: 1;
-    opacity: 0.6;
-    flex-shrink: 0;
-  }
+  .chip-x { cursor: pointer; font-size: 15px; line-height: 1; opacity: 0.6; flex-shrink: 0; }
   .chip-x:hover { opacity: 1; }
-
-  /* Messages */
-  .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    background: var(--bg);
-  }
-
-  .empty-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    text-align: center;
-    color: var(--text2);
-    padding: 40px;
-    gap: 8px;
-  }
+  .messages { flex: 1; overflow-y: auto; padding: 20px 18px; display: flex; flex-direction: column; gap: 14px; background: var(--bg); }
+  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; color: var(--text2); padding: 40px; gap: 8px; }
   .empty-icon { font-size: 36px; margin-bottom: 4px; }
   .empty-title { font-size: 16px; font-weight: 500; color: var(--text); }
   .empty-sub { font-size: 13px; line-height: 1.6; }
-
   .msg { display: flex; flex-direction: column; max-width: 82%; }
   .msg.user { align-self: flex-end; align-items: flex-end; }
   .msg.assistant { align-self: flex-start; align-items: flex-start; }
-
-  .bubble {
-    padding: 11px 15px;
-    border-radius: var(--radius-lg);
-    font-size: 14px;
-    line-height: 1.65;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text);
-    word-break: break-word;
-    white-space: pre-wrap;
-  }
-  .msg.user .bubble {
-    background: var(--accent-bg);
-    border-color: rgba(10,92,196,0.2);
-    border-bottom-right-radius: 4px;
-  }
-  .msg.assistant .bubble {
-    background: var(--bg2);
-    border-bottom-left-radius: 4px;
-  }
-
-  .msg-meta {
-    font-size: 10px;
-    color: var(--text3);
-    margin-top: 4px;
-    padding: 0 3px;
-  }
-
-  /* Source tags */
+  .bubble { padding: 11px 15px; border-radius: var(--radius-lg); font-size: 14px; line-height: 1.65; border: 1px solid var(--border); background: var(--bg); color: var(--text); word-break: break-word; white-space: pre-wrap; }
+  .msg.user .bubble { background: var(--accent-bg); border-color: rgba(10,92,196,0.2); border-bottom-right-radius: 4px; }
+  .msg.assistant .bubble { background: var(--bg2); border-bottom-left-radius: 4px; }
+  .msg-meta { font-size: 10px; color: var(--text3); margin-top: 4px; padding: 0 3px; }
   .source-list { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
-  .source-tag {
-    font-size: 10px;
-    padding: 2px 7px;
-    background: var(--bg3);
-    color: var(--text2);
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
-
-  /* Typing indicator */
-  .thinking .bubble {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding: 14px 16px;
-  }
-  .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--text3);
-    animation: pulse 1.3s infinite;
-  }
+  .source-tag { font-size: 10px; padding: 2px 7px; background: var(--bg3); color: var(--text2); border-radius: 4px; border: 1px solid var(--border); }
+  .thinking .bubble { display: flex; gap: 4px; align-items: center; padding: 14px 16px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); animation: pulse 1.3s infinite; }
   .dot:nth-child(2) { animation-delay: 0.2s; }
   .dot:nth-child(3) { animation-delay: 0.4s; }
   @keyframes pulse { 0%,80%,100%{opacity:0.15} 40%{opacity:1} }
-
-  /* Error */
-  .error .bubble {
-    background: #fff0f0;
-    border-color: #fccfcf;
-    color: #c0392b;
-  }
-  @media (prefers-color-scheme: dark) {
-    .error .bubble { background: #2d1010; border-color: #5a2020; color: #f08080; }
-  }
-
-  /* Input */
-  .input-bar {
-    display: flex;
-    gap: 10px;
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
-    background: var(--bg);
-    flex-shrink: 0;
-    align-items: flex-end;
-  }
-  .input-wrap { flex: 1; position: relative; }
-  textarea {
-    width: 100%;
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    padding: 9px 13px;
-    font-size: 14px;
-    font-family: var(--font);
-    color: var(--text);
-    background: var(--bg);
-    resize: none;
-    line-height: 1.5;
-    height: 42px;
-    max-height: 130px;
-    overflow-y: auto;
-    transition: border-color 0.15s;
-  }
+  .error .bubble { background: #fff0f0; border-color: #fccfcf; color: #c0392b; }
+  @media (prefers-color-scheme: dark) { .error .bubble { background: #2d1010; border-color: #5a2020; color: #f08080; } }
+  .input-bar { display: flex; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--border); background: var(--bg); flex-shrink: 0; align-items: flex-end; }
+  textarea { flex: 1; border: 1px solid var(--border2); border-radius: var(--radius); padding: 9px 13px; font-size: 14px; font-family: var(--font); color: var(--text); background: var(--bg); resize: none; line-height: 1.5; height: 42px; max-height: 130px; overflow-y: auto; }
   textarea:focus { outline: none; border-color: var(--accent); }
   textarea::placeholder { color: var(--text3); }
   textarea:disabled { opacity: 0.5; }
-
-  .send-btn {
-    width: 42px; height: 42px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border2);
-    background: var(--accent);
-    color: #fff;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: opacity 0.15s, transform 0.1s;
-  }
+  .send-btn { width: 42px; height: 42px; border-radius: var(--radius); border: 1px solid var(--border2); background: var(--accent); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .send-btn:hover { opacity: 0.88; }
   .send-btn:active { transform: scale(0.95); }
   .send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
   .send-btn svg { width: 18px; height: 18px; fill: #fff; }
-
-  /* Status bar */
-  .status-bar {
-    font-size: 11px;
-    color: var(--text3);
-    padding: 4px 18px 8px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    background: var(--bg);
-    flex-shrink: 0;
-  }
+  .status-bar { font-size: 11px; color: var(--text3); padding: 4px 18px 8px; display: flex; gap: 8px; align-items: center; background: var(--bg); flex-shrink: 0; }
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
 </style>
 </head>
 <body>
-
 <div class="app">
-
-  <!-- Header -->
   <div class="header">
     <div class="header-logo">🤖</div>
     <div class="header-info">
@@ -334,8 +90,6 @@
     </div>
     <div class="header-badge">claude-sonnet-4</div>
   </div>
-
-  <!-- Sélecteur de documents -->
   <div class="doc-bar">
     <div class="doc-row">
       <span class="doc-label">Section :</span>
@@ -349,16 +103,12 @@
         <option value="modules">🔗 Modules connexes</option>
         <option value="maj">🆕 Notes de mise à jour</option>
       </select>
-      <select id="docSelect">
-        <option value="">— choisir un guide —</option>
-      </select>
+      <select id="docSelect"><option value="">— choisir un guide —</option></select>
       <button class="btn-add" onclick="addDoc()">+ Ajouter</button>
-      <button class="btn-clear" onclick="clearDocs()" title="Retirer tous les guides">Vider</button>
+      <button class="btn-clear" onclick="clearDocs()">Vider</button>
     </div>
     <div class="chips" id="chips"></div>
   </div>
-
-  <!-- Messages -->
   <div class="messages" id="messages">
     <div class="empty-state" id="emptyState">
       <div class="empty-icon">📚</div>
@@ -366,85 +116,96 @@
       <div class="empty-sub">Sélectionnez une section, ajoutez un ou plusieurs guides,<br>puis posez votre question ci-dessous.</div>
     </div>
   </div>
-
-  <!-- Barre de statut -->
   <div class="status-bar">
     <div class="status-dot"></div>
     <span id="statusText">En attente — aucun document chargé</span>
   </div>
-
-  <!-- Zone de saisie -->
   <div class="input-bar">
-    <textarea
-      id="question"
-      placeholder="Posez votre question sur Exabanque…"
-      onkeydown="handleKey(event)"
-      oninput="autoResize(this)"
-      rows="1"
-    ></textarea>
+    <textarea id="question" placeholder="Posez votre question sur Exabanque…" onkeydown="handleKey(event)" oninput="autoResize(this)" rows="1"></textarea>
     <button class="send-btn" id="sendBtn" onclick="send()" title="Envoyer" disabled>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     </button>
   </div>
-
 </div>
-
 <script>
-/* ── Catalogue des guides ── */
+const BASE = "https://frandon-heyme.github.io/exabanque-assistant/pdfs/";
 const CATALOG = {
   securite: [
-    { name: "EBICS T — Présentation générale", url: "https://www.exabanque.com/download/guide-ebics-t-presentation.pdf" },
-    { name: "EBICS TS — Configuration certificats", url: "https://www.exabanque.com/download/guide-ebics-ts-config.pdf" },
-    { name: "OTP — Authentification forte", url: "https://www.exabanque.com/download/guide-otp-auth.pdf" },
-    { name: "FIDO — Clé de sécurité physique", url: "https://www.exabanque.com/download/guide-fido.pdf" },
-    { name: "SConnect — Connexion sécurisée", url: "https://www.exabanque.com/download/guide-sconnect.pdf" },
-    { name: "Grille de sécurité", url: "https://www.exabanque.com/download/guide-grille-securite.pdf" },
-    { name: "Certificats électroniques", url: "https://www.exabanque.com/download/guide-certificats.pdf" },
+    { name: "Sécurité dans Exabanque",              url: BASE + "EXB_FR_Securite_dans_Exabanque.pdf" },
+    { name: "EBICS T",                               url: BASE + "EXB_FR_EBICS_T.pdf" },
+    { name: "EBICS TS",                              url: BASE + "EXB_FR_EBICS_TS.pdf" },
+    { name: "Authentification OTP",                  url: BASE + "EXB_FR_Authentification_OTP.pdf" },
+    { name: "Clé FIDO",                              url: BASE + "EXB_FR_Cle_FIDO.pdf" },
+    { name: "SConnect",                              url: BASE + "EXB_FR_SConnect.pdf" },
+    { name: "SafeNet SConnect MacOS",                url: BASE + "EXB_FR_SafeNet_SConnect_MacOS.pdf" },
+    { name: "Grille d'authentification",             url: BASE + "EXB_FR_Grille_authentification.pdf" },
+    { name: "Identification biométrique",            url: BASE + "EXB_FR_Identification_biometrique.pdf" },
+    { name: "Authentification et droits utilisateurs", url: BASE + "EXB_FR_Authentification_et_droits_utilisateurs.pdf" },
+    { name: "Renouveler certificat — Administrateur", url: BASE + "EXB_FR_Administrateur_Renouveler_certificat_signature.pdf" },
+    { name: "Renouveler certificat — Utilisateur",   url: BASE + "EXB_FR_Utilisateur_Renouveler_certificat_signature.pdf" },
+    { name: "Accusés réception EBICS",               url: BASE + "EXB_FR_Accuses_reception_EBICS.pdf" },
   ],
   banque: [
-    { name: "Relevés de comptes", url: "https://www.exabanque.com/download/guide-releves.pdf" },
-    { name: "Gestion des comptes bancaires", url: "https://www.exabanque.com/download/guide-comptes.pdf" },
-    { name: "Rapprochement bancaire", url: "https://www.exabanque.com/download/guide-rapprochement.pdf" },
-    { name: "Export et formats de données", url: "https://www.exabanque.com/download/guide-export.pdf" },
+    { name: "Première utilisation",                  url: BASE + "EXB_FR_Premiere_utilisation.pdf" },
+    { name: "Relevés de comptes",                    url: BASE + "EXB_FR_Releves_comptes.pdf" },
+    { name: "Comptes bancaires et paramètres transmission", url: BASE + "EXB_FR_Comptes_bancaires_et_parametres_transmission.pdf" },
+    { name: "Mouvements Intradays",                  url: BASE + "EXB_FR_Mouvements_Intradays.pdf" },
+    { name: "Historique réceptions relevés",         url: BASE + "EXB_FR_Historique_receptions_releves.pdf" },
+    { name: "Historique remises envoyées",           url: BASE + "EXB_FR_Historique_remises_envoyees.pdf" },
+    { name: "Rapprochement comptable",               url: BASE + "EXB_FR_Rapprochement_comptable.pdf" },
+    { name: "Recherche multicritère",                url: BASE + "EXB_FR_Recherche_multicritere.pdf" },
+    { name: "Options affichage, tri et macros",      url: BASE + "EXB_FR_Options_affichage_tri_et_macros.pdf" },
+    { name: "Tableaux fonctionnalités avancées",     url: BASE + "EXB_FR_Tableaux_Fonctionnalites_avancees.pdf" },
+    { name: "Société abonnée et sociétés rattachées", url: BASE + "EXB_FR_Societe_abonnee_et_societes_rattachees.pdf" },
+    { name: "Pays autorisés",                        url: BASE + "EXB_FR_Pays_autorises.pdf" },
   ],
   paiements: [
-    { name: "Virements SEPA — Guide complet", url: "https://www.exabanque.com/download/guide-virements-sepa.pdf" },
-    { name: "Virements internationaux", url: "https://www.exabanque.com/download/guide-virements-international.pdf" },
-    { name: "Prélèvements SEPA (SDD)", url: "https://www.exabanque.com/download/guide-prelevements-sepa.pdf" },
-    { name: "Chèques et LCR", url: "https://www.exabanque.com/download/guide-cheques-lcr.pdf" },
+    { name: "Remises virements SEPA",                url: BASE + "EXB_FR_Remises_virements_SEPA.pdf" },
+    { name: "Listes virements SEPA",                 url: BASE + "EXB_FR_Listes_virements_SEPA.pdf" },
+    { name: "Remises virements internationaux",      url: BASE + "EXB_FR_Remises_virements_internationaux.pdf" },
+    { name: "Listes virements internationaux",       url: BASE + "EXB_FR_Listes_virements_internationaux.pdf" },
+    { name: "Modèles virements internationaux",      url: BASE + "EXB_FR_Modeles_virements_internationaux.pdf" },
+    { name: "Prélèvements SEPA",                     url: BASE + "EXB_FR_Prelevements_SEPA.pdf" },
+    { name: "Envoi fichiers virements",              url: BASE + "EXB_FR_Envoi_fichiers_virements.pdf" },
+    { name: "Processus validation paiements",        url: BASE + "EXB_FR_Processus_validation_paiements.pdf" },
+    { name: "Destinataires et groupes destinataires", url: BASE + "EXB_FR_Destinataires_et_groupes_destinataires.pdf" },
+    { name: "Gestion mandats",                       url: BASE + "EXB_FR_Gestion_mandats.pdf" },
+    { name: "Taux de marché et cours de change",     url: BASE + "EXB_FR_Taux_de_marche_et_cours_de_change.pdf" },
+    { name: "VoP (Verification of Payee)",           url: BASE + "EXB_FR_VoP.pdf" },
+    { name: "Audit destinataires — SisID",           url: BASE + "EXB_FR_Audit_destinataires_et_paiements_avec_SisID.pdf" },
+    { name: "Audit destinataires — Trustpair",       url: BASE + "EXB_FR_Audit_destinataires_et_paiements_avec_Trustpair.pdf" },
+    { name: "Convertisseur CSV vers ISO20022",       url: BASE + "EXB_FR_Convertisseur_fichiers_CSV_vers_ISO20022.pdf" },
   ],
   tresorerie: [
-    { name: "Prévisions de trésorerie", url: "https://www.exabanque.com/download/guide-previsions.pdf" },
-    { name: "Gestion des liquidités", url: "https://www.exabanque.com/download/guide-liquidites.pdf" },
-    { name: "Échelles d'intérêts", url: "https://www.exabanque.com/download/guide-echelles-interets.pdf" },
+    { name: "Paramétrer module trésorerie",          url: BASE + "EXB_FR_Parametrer_Module_Tresorerie.pdf" },
+    { name: "Utiliser module trésorerie",            url: BASE + "EXB_FR_Utiliser_Module_Tresorerie.pdf" },
+    { name: "Gestion liquidités",                    url: BASE + "EXB_FR_Gestion_liquidites.pdf" },
+    { name: "Échelles bancaires",                    url: BASE + "EXB_FR_Echelles_bancaires.pdf" },
   ],
   parametrage: [
-    { name: "Gestion des utilisateurs", url: "https://www.exabanque.com/download/guide-utilisateurs.pdf" },
-    { name: "Droits et profils d'accès", url: "https://www.exabanque.com/download/guide-droits-profils.pdf" },
-    { name: "Mandats SEPA B2B", url: "https://www.exabanque.com/download/guide-mandats-b2b.pdf" },
-    { name: "Configuration générale", url: "https://www.exabanque.com/download/guide-configuration.pdf" },
+    { name: "Authentification et droits utilisateurs", url: BASE + "EXB_FR_Authentification_et_droits_utilisateurs.pdf" },
+    { name: "Société abonnée et sociétés rattachées", url: BASE + "EXB_FR_Societe_abonnee_et_societes_rattachees.pdf" },
+    { name: "Comptes bancaires et paramètres transmission", url: BASE + "EXB_FR_Comptes_bancaires_et_parametres_transmission.pdf" },
+    { name: "Gestion mandats",                       url: BASE + "EXB_FR_Gestion_mandats.pdf" },
+    { name: "Options affichage, tri et macros",      url: BASE + "EXB_FR_Options_affichage_tri_et_macros.pdf" },
   ],
   modules: [
-    { name: "Interface comptabilité", url: "https://www.exabanque.com/download/guide-interface-compta.pdf" },
-    { name: "FTP-Bank — Transfert automatique", url: "https://www.exabanque.com/download/guide-ftp-bank.pdf" },
-    { name: "Application mobile Exabanque", url: "https://www.exabanque.com/download/guide-mobile.pdf" },
+    { name: "Interface comptabilité",                url: BASE + "EXB_FR_Interface_comptabilite.pdf" },
+    { name: "FTP-Bank",                              url: BASE + "EXB_FR_FTP-Bank.pdf" },
+    { name: "Application mobile",                    url: BASE + "EXB_FR_Mobile.pdf" },
   ],
   maj: [
-    { name: "Notes de version 18.3", url: "https://www.exabanque.com/download/maj-18-3.pdf" },
-    { name: "Notes de version 18.6", url: "https://www.exabanque.com/download/maj-18-6.pdf" },
-    { name: "Notes de version 18.9", url: "https://www.exabanque.com/download/maj-18-9.pdf" },
-    { name: "Notes de version 18.11", url: "https://www.exabanque.com/download/maj-18-11.pdf" },
+    { name: "Mise à jour 18.3",                      url: BASE + "Mise-a-jour_EXB_18.3.pdf" },
+    { name: "Mise à jour 18.4 et 18.5",              url: BASE + "Mise-a-jour_EXB_18_4_et_18.5.pdf" },
+    { name: "Mise à jour 18.6",                      url: BASE + "Mise-a-jour_EXB_18.6.pdf" },
+    { name: "Mise à jour 18.7",                      url: BASE + "Mise-a-jour_EXB_18.7.pdf" },
+    { name: "Mise à jour 18.8",                      url: BASE + "Mise-a-jour_EXB_18.8.pdf" },
+    { name: "Mise à jour 18.11",                     url: BASE + "Mise-a-jour_EXB_18.11.pdf" },
   ]
 };
 
-/* ── État ── */
-let selectedDocs = [];
-let history = [];
-let busy = false;
+let selectedDocs = [], history = [], busy = false;
 
-/* ── Sélecteur ── */
 function loadSection() {
   const sec = document.getElementById('sectionSelect').value;
   const sel = document.getElementById('docSelect');
@@ -468,86 +229,44 @@ function addDoc() {
   render();
 }
 
-function removeDoc(url) {
-  selectedDocs = selectedDocs.filter(d => d.url !== url);
-  render();
-}
-
-function clearDocs() {
-  selectedDocs = [];
-  render();
-}
+function removeDoc(url) { selectedDocs = selectedDocs.filter(d => d.url !== url); render(); }
+function clearDocs() { selectedDocs = []; render(); }
 
 function render() {
-  const c = document.getElementById('chips');
-  c.innerHTML = selectedDocs.map(d =>
-    `<span class="chip">
-      <span class="chip-name" title="${d.name}">${d.name}</span>
-      <span class="chip-x" onclick="removeDoc('${d.url.replace(/'/g, "\\'")}')" title="Retirer">×</span>
-    </span>`
+  document.getElementById('chips').innerHTML = selectedDocs.map(d =>
+    `<span class="chip"><span class="chip-name" title="${d.name}">${d.name}</span><span class="chip-x" onclick="removeDoc('${d.url.replace(/'/g,"\\'")}')">×</span></span>`
   ).join('');
-  updateStatus();
+  const s = document.getElementById('statusText');
+  s.textContent = selectedDocs.length === 0
+    ? 'En attente — aucun document chargé'
+    : `${selectedDocs.length} guide${selectedDocs.length > 1 ? 's' : ''} chargé${selectedDocs.length > 1 ? 's' : ''}`;
   updateSendBtn();
 }
 
-function updateStatus() {
-  const s = document.getElementById('statusText');
-  if (selectedDocs.length === 0) {
-    s.textContent = 'En attente — aucun document chargé';
-  } else {
-    s.textContent = `${selectedDocs.length} guide${selectedDocs.length > 1 ? 's' : ''} chargé${selectedDocs.length > 1 ? 's' : ''}`;
-  }
-}
-
-function updateSendBtn() {
-  const btn = document.getElementById('sendBtn');
-  const q = document.getElementById('question').value.trim();
-  btn.disabled = busy || !q;
-}
-
-/* ── Textarea auto-resize ── */
 function autoResize(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 130) + 'px';
   updateSendBtn();
 }
 
-/* ── Messages ── */
-function clearEmpty() {
-  const e = document.getElementById('emptyState');
-  if (e) e.remove();
+function updateSendBtn() {
+  document.getElementById('sendBtn').disabled = busy || !document.getElementById('question').value.trim();
 }
+
+function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
+
+function clearEmpty() { const e = document.getElementById('emptyState'); if (e) e.remove(); }
 
 function addMsg(role, text, sources) {
   clearEmpty();
   const msgs = document.getElementById('messages');
   const wrap = document.createElement('div');
   wrap.className = `msg ${role}`;
-
-  let sourcesHtml = '';
-  if (sources && sources.length) {
-    sourcesHtml = `<div class="source-list">${sources.map(s =>
-      `<span class="source-tag">${s.slice(0, 35)}${s.length > 35 ? '…' : ''}</span>`
-    ).join('')}</div>`;
-  }
-
-  const now = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-  wrap.innerHTML = `
-    <div class="bubble">${escHtml(text)}</div>
-    ${sourcesHtml}
-    <div class="msg-meta">${now}</div>
-  `;
-  msgs.appendChild(wrap);
-  msgs.scrollTop = msgs.scrollHeight;
-  return wrap;
-}
-
-function addError(msg) {
-  clearEmpty();
-  const msgs = document.getElementById('messages');
-  const wrap = document.createElement('div');
-  wrap.className = 'msg assistant error';
-  wrap.innerHTML = `<div class="bubble">${escHtml(msg)}</div>`;
+  const srcHtml = sources && sources.length
+    ? `<div class="source-list">${sources.map(s => `<span class="source-tag">${s.slice(0,35)}${s.length>35?'…':''}</span>`).join('')}</div>`
+    : '';
+  const now = new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+  wrap.innerHTML = `<div class="bubble">${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}</div>${srcHtml}<div class="msg-meta">${now}</div>`;
   msgs.appendChild(wrap);
   msgs.scrollTop = msgs.scrollHeight;
 }
@@ -555,133 +274,76 @@ function addError(msg) {
 function showThinking() {
   clearEmpty();
   const msgs = document.getElementById('messages');
-  const wrap = document.createElement('div');
-  wrap.className = 'msg assistant thinking';
-  wrap.id = 'thinking';
-  wrap.innerHTML = `<div class="bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
-  msgs.appendChild(wrap);
-  msgs.scrollTop = msgs.scrollHeight;
+  const w = document.createElement('div');
+  w.className = 'msg assistant thinking'; w.id = 'thinking';
+  w.innerHTML = '<div class="bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+  msgs.appendChild(w); msgs.scrollTop = msgs.scrollHeight;
 }
 
-function removeThinking() {
-  const t = document.getElementById('thinking');
-  if (t) t.remove();
-}
-
-function escHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/\n/g, '<br>');
-}
-
-/* ── Envoi ── */
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    send();
-  }
-}
+function removeThinking() { const t = document.getElementById('thinking'); if (t) t.remove(); }
 
 async function send() {
   if (busy) return;
   const q = document.getElementById('question').value.trim();
   if (!q) return;
-
   document.getElementById('question').value = '';
   document.getElementById('question').style.height = '42px';
   document.getElementById('sendBtn').disabled = true;
   busy = true;
-
-  document.getElementById('statusText').textContent = 'Traitement en cours…';
-
+  document.getElementById('statusText').textContent = 'Chargement des PDFs…';
   addMsg('user', q);
   showThinking();
 
-  const systemPrompt = `Tu es un assistant expert Cegid Exabanque. Tu réponds UNIQUEMENT à partir des documents PDF fournis dans cette conversation. Pour chaque information que tu donnes, cite toujours le nom du guide source et, si possible, le numéro de page ou la section. Si l'information demandée ne figure pas dans les documents fournis, dis-le clairement et suggère quel guide pourrait contenir cette information. Tu réponds toujours en français, de façon précise et structurée.`;
+  const system = `Tu es un assistant expert Cegid Exabanque. Tu réponds UNIQUEMENT à partir des documents PDF fournis. Pour chaque information, cite toujours le nom du guide source et si possible le numéro de page ou la section. Si l'information n'est pas dans les documents fournis, dis-le clairement. Réponds en français, de façon précise et structurée.`;
 
-  /* Construction du contenu utilisateur avec les PDFs */
   const userContent = [];
-
-  if (selectedDocs.length === 0) {
-    userContent.push({
-      type: 'text',
-      text: `[Aucun document chargé] ${q}`
-    });
-  } else {
-    for (const doc of selectedDocs) {
-      try {
-        const resp = await fetch(doc.url);
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const blob = await resp.blob();
-        const b64 = await blobToBase64(blob);
-        userContent.push({
-          type: 'document',
-          source: { type: 'base64', media_type: 'application/pdf', data: b64 },
-          title: doc.name
-        });
-      } catch (e) {
-        userContent.push({
-          type: 'text',
-          text: `[PDF "${doc.name}" indisponible : ${e.message}. Informe l'utilisateur que ce guide n'a pas pu être chargé et réponds au mieux sans lui.]`
-        });
-      }
+  for (const doc of selectedDocs) {
+    try {
+      const resp = await fetch(doc.url);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const blob = await resp.blob();
+      const b64 = await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result.split(',')[1]);
+        r.onerror = () => rej(new Error('Lecture échouée'));
+        r.readAsDataURL(blob);
+      });
+      userContent.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: b64 }, title: doc.name });
+    } catch(e) {
+      userContent.push({ type: 'text', text: `[PDF "${doc.name}" indisponible : ${e.message}]` });
     }
-    userContent.push({ type: 'text', text: q });
   }
+  if (selectedDocs.length === 0) userContent.push({ type: 'text', text: `[Aucun document chargé] ${q}` });
+  else userContent.push({ type: 'text', text: q });
 
   history.push({ role: 'user', content: userContent });
+  document.getElementById('statusText').textContent = 'Analyse en cours…';
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: history
-      })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system, messages: history })
     });
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error?.message || `Erreur API HTTP ${res.status}`);
-    }
-
+    if (!res.ok) { const err = await res.json().catch(()=>({})); throw new Error(err.error?.message || `HTTP ${res.status}`); }
     const data = await res.json();
-    const reply = (data.content || [])
-      .filter(b => b.type === 'text')
-      .map(b => b.text)
-      .join('\n') || '(réponse vide)';
-
+    const reply = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n') || '(réponse vide)';
     removeThinking();
     addMsg('assistant', reply, selectedDocs.map(d => d.name));
     history.push({ role: 'assistant', content: reply });
-
-  } catch (e) {
+  } catch(e) {
     removeThinking();
-    addError(`Erreur : ${e.message}`);
+    const w = document.createElement('div');
+    w.className = 'msg assistant error';
+    w.innerHTML = `<div class="bubble">Erreur : ${e.message}</div>`;
+    document.getElementById('messages').appendChild(w);
     history.pop();
   }
 
   busy = false;
-  updateStatus();
-  updateSendBtn();
+  render();
 }
 
-function blobToBase64(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = () => reject(new Error('Lecture du fichier échouée'));
-    reader.readAsDataURL(blob);
-  });
-}
-
-/* Init */
 document.getElementById('question').addEventListener('input', updateSendBtn);
 </script>
 </body>
